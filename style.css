@@ -1,0 +1,125 @@
+*{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+.page{
+	min-height: 100vh;
+	max-height: 100%;
+	padding-top: 3%;
+	overflow: scroll;
+	padding-left:20%;
+	padding-right:20%;
+}
+
+#menu{
+	top: 0;
+	position: fixed;
+	background-color:#070707;
+	width: 100%;
+}
+
+.listNav{
+	display: inline
+}
+
+.navItem{
+	padding: 5px;
+	font-weight: 700;
+	color: #ec262d;
+	font-size: 30px;
+	margin-right: 10px;
+	margin-left: 20px;
+	position: relative;
+}
+
+#backTop{
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	border: 3px solid white;
+	border-radius: 40%;
+	background-color: #636065;
+	text-decoration: none;
+	color: #fcefff;
+	font-weight: 800;
+	font-size: 50px;
+}
+
+pre{
+	background-color: #bbd2c2;
+	border-radius: 20px;
+	margin-left: 95px;
+	padding-left: 5%;
+	max-width: 90%;
+	text-align: left;
+	white-space: pre-wrap;
+}
+
+h1{
+	text-align: center;
+	text-decoration: underline;
+}
+
+p{
+	text-align: justify;
+	text-indent: 50px;
+}
+
+h5, ol{
+	text-align: left;
+}
+
+h5{
+	text-decoration: underline;
+	font-size: 18px;
+}
+
+#homePage{
+	background-color: #a297a9; 
+}
+
+#installPage{
+	background-color:#d27863;
+}
+
+#clientPage{
+	background-color: #a93c4d;
+}
+
+#serverPage{
+	background-color: #3f3fa9;
+}
+
+#stylePage{
+	background-color: #56a935;
+}
+
+#gitPage{
+	background-color: #bca329;
+}
+
+#hostPage{
+	background-color: #44bdc1;
+}
+
+#notePage{
+	font-size: 25px;
+	font-weight: 500;
+}
+
+
+
+
+
+

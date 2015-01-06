@@ -69,13 +69,11 @@ a:hover {
   color: #fcefff;
   font-size: 60px;
   font-weight: 800;
-  padding-top: 5px;
   position: fixed;
   right: 5%;
   text-decoration: none;
-  width: 3%;
-  height: 8%;
   color: white;
+  text-align:center;
 }
 
 pre{
@@ -89,6 +87,7 @@ pre{
   max-width: 90%;
   text-align: left;
   white-space: pre-wrap;
+  line-height: 25px;
 }
 
 h1{
@@ -111,7 +110,7 @@ p{
   line-height: 25px;
 }
 
-h5, ol{
+h5, ol, ul{
   text-align: left;
   line-height: 25px;
 }

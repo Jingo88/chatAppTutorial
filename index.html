@@ -8,15 +8,15 @@
 <body>
 	<div id='entirePage'>
 		<div id='menu'>
-			<li class='listNav' id='installMove'><a href='#installPage' class='navItem'>Setup/Installation</a></li>
-			<li class='listNav' id='clientMove'><a href='#clientPage' class='navItem'>Client</a></li>
-			<li class='listNav' id='serverMove'><a href='#serverPage' class='navItem'>Server</a></li>
-			<li class='listNav' id='gitMove'><a href='#gitPage' class='navItem'>Git/Github</a></li>
-			<li class='listNav' id='hostMove'><a href='#hostPage' class='navItem'>Hosting</a></li>
+			<li class='listNav' id='installMove'><a href='#installPage' class='navItem'>SETUP/INSTALLATION</a></li>
+			<li class='listNav' id='clientMove'><a href='#clientPage' class='navItem'>CLIENT</a></li>
+			<li class='listNav' id='serverMove'><a href='#serverPage' class='navItem'>SERVER</a></li>
+			<li class='listNav' id='gitMove'><a href='#gitPage' class='navItem'>GIT/GITHUB</a></li>
+			<li class='listNav' id='hostMove'><a href='#hostPage' class='navItem'>HOSTING</a></li>
 		</div>
 
 		<div>
-			<h4 id='backTop'> ^ </h4>
+			<h4> <a href='#homePage' id='backTop'> ^ </a></h4>
 		</div>
 
 		<div id='homePage' class='page'>
@@ -139,7 +139,7 @@ var parsed = JSON.parse(object);
 					<h5>Sending Information</h5>
 					
 					<ol>
-						<li>Create an event listener which will listen for an action. For example, !!!** clicking the submit button. //OR you may use a query selector and target the button you created for the user to click when submitting their text????**</li>
+						<li>Create an event listener which will listen for an action. For example, clicking the submit button.</li>
 						<li>When this event is triggered it will run a function which should include a "send" method.</li>
 						<li>In this case, userMessage, will be a stringified object.</li>
 						<li>The values within the object are text which was grabbed from an input box (which we created in our HTML) the moment the submit button was clicked.</li>
@@ -208,28 +208,6 @@ server.on('connection', function(ws){
 				</pre></code>
 
 				<p>While the WebSocket connection is running, we want to perform three tasks: (1) add the new client to the server-maintained clients array, (2) listen for a WebSocket connection closing, and (3) listen for a message from a WebSocket client and broadcast it.</p>
-<!-- <ol>
-<li>Add the new client to the server-maintained clients array.</li>
-<li>Listen for a WebSocket connection closing. Close it and remove it from the array. This is important. Without this step, every time a client leaves, our app will crash.</li>
-<li>Listen for a message from a WebSocket client and broadcast it.</li>
-</ol>
-<pre><code>
-server.on("connection", function(ws) {
-clients.push(ws);
-ws.on("close", function() {
-var x = clients.indexOf(ws);
-clients.splice(x,1);
-console.log("Clients connected: " + clients.length);
-});
-ws.on("message", function(input) {
-processedInput = JSON.parse(input);
-console.log(processedInput.name + " : " + processedInput.text);
-for (i = 0; i < clients.length; i++) {
-clients[i].send(input);
-};
-});
-});
-</pre></code> -->
 
 				<ol>
 				<li>Add the new client to the server-maintained clients array.</li>

@@ -37,7 +37,7 @@ When you first begin you may want to host your chat app locally. This will allow
 
 Create an event listener which will listen for when the page is open or connected to a server. 
 
-    ws.addEventListener(‘open’, function(evt){
+    ws.addEventListener('open', function(evt){
         // Almost all of your code will go in here
     });
 
@@ -49,7 +49,7 @@ What information are you storing about your client? We will be using objects to 
 
     var object = {
         name: name,
-        text: yourInputBoxElement.value,
+        text: yourInputBoxElement.value
     }
 
 Wait, we can't send Objects the way they are formatted. So how do we send information? JSON. JSON (JavaScript Object Notation) is just a simple way to interchange data. Clients can only send data in the form of strings, JSON is able to break code down and represent it in the form of objects with key/value pairs, hashes or arrays. There are two main commands for the sending and receiving data through JSON:
@@ -62,8 +62,9 @@ Wait, we can't send Objects the way they are formatted. So how do we send inform
     * We use the parse method to turn our string back into an object and send it out.
     * And once the client receives the data, the whole process of stringify and parse starts over again.
 
-    var stringified = JSON.stringify(object);
-    var parsed = JSON.parse(object);
+    `var stringified = JSON.stringify(object);`
+
+    `var parsed = JSON.parse(object);`
 
 ### Sending Information
 1. Create an event listener which will listen for an action. For example, you may use a query selector and target the button you created for the user to click when submitting their text
@@ -73,30 +74,45 @@ Wait, we can't send Objects the way they are formatted. So how do we send inform
 5. What does this mean? This about the first step of writing in a chat app. We open our app, type into and input box, and click send.
 
     button.addEventListener('click', function(){
-        var object = {
-            name : name,
-            text : YourInputBox.value,
-        };
 
+        var object = {
+
+            name : name,
+
+            text : YourInputBox.value
+
+        };
+        
         var userMessage = JSON.stringify(object);
         ws.send(userMessage);
+
     });
 
 ### Receiving Information
 1. The event listener in this scenario will be "message." Whenever a message is received by the client, the file will run a function.
 2. The goal is to use stringify and parse in both the client and server JS files. For example, the server should be parsing and storing some of the information which has been sent, such as keeping a history of the chat, to share with new users. The server would then stringify and send the information back out to the new clients.
-3. Receiving messages will always need to be parsed for the server to be able to read them. Once parsed you can determine what to do with the values in the object:
+3. Receiving messages will always need to be parsed for the server to be able to read them. Once parsed you can determine what to
+ do with the values in the object:
 
-    ws.addEventListener('message', function(x){
-        var parsed = JSON.parse(x.data);
-        var paragraph = document.createElement('span');
-        var userbubble = document.createElement('div');
-        var lineBreak = document.createElement('br');
-        paragraph.innerText = parsed.name + ": " + parsed.text;
-        paragraph.appendChild(lineBreak);
-        userbubble.appendChild(paragraph);
-        ChatBoxDiv.appendChild(bubble);
-    });
+`    ws.addEventListener('message', function(x){`
+
+`        var parsed = JSON.parse(x.data);`
+
+`        var paragraph = document.createElement('span');`
+
+`        var userbubble = document.createElement('div');`
+
+`        var lineBreak = document.createElement('br');`
+
+`        paragraph.innerText = parsed.name + ": " + parsed.text;`
+
+`        paragraph.appendChild(lineBreak);`
+
+`        userbubble.appendChild(paragraph);`
+
+`        ChatBoxDiv.appendChild(bubble);`
+
+`    });`
 
 # Building Your Server.js File
 Now that we have a super fancy functional client, we need a server so we can actually run our app. Remember all messages need to be sent through a server. Without this we have nothing. Let's begin by creating and opening a server.js file. We need to first declare a WebSocket server object using the same ws package. We are declaring the variable for the actual server:
@@ -116,6 +132,7 @@ We need an event listener for the event of each client connecting to the server.
     });
 
 While the WebSocket connection is up, we want to perform three tasks: (1) add the new client to the server-maintained clients array, (2) listen for a WebSocket connection closing, and (3) listen for a message from a WebSocket client and broadcast it.
+
 1. Add the new client to the server-maintained clients array.
 
     server.on("connection", function(ws) {
@@ -188,39 +205,42 @@ What is committing and how is it different from adding? When you added your file
 What exactly is happening here? We are saving our commit to GitHub and telling it that our origin is our base (master). If you were working of branch you would type that branch name instead of master.
 
 # Testing out locally
-When you believe your code will function it’s time to test it out.
+When you believe your code will function it's time to test it out.
+
 1. Launch a Terminal window, and run your server code: `node server_code.js`
 2. Now in a browser window, type in the address localhost:3000 (or the number of whatever port you designated).
 3. This should display your chat app. Type in a line or two of chat.
 4. Now open a second browser window and type in the same address. As you type in the two windows, all the chat text should be appearing in both. Check the Terminal window after each new action (client connection/disconnection, new feature test) to ascertain what action (if any) crashes the server.
 5. Open up more browser windows, using different browsers and devices. Verify that the chat continues to work.
 6. Close each connection and verify that the server is still running and that the remaining connections are open.
+
 Now you’re ready to host the app on the Digital Ocean server.
 
 
 # Hosting on the Web with Digital Ocean
-Digital Ocean(DO) is a server service where you will be able to host your project. The following three items are necessary before starting the hosting steps:
-1. Create a Digital Ocean Account
+[Digital Ocean](http://www.digitalocean.com "Digital Ocean") (DO) is a server service where you will be able to host your project. The following three items are necessary before starting the hosting steps:
+
+1. Create a Digital Ocean account.
 2. Grab the SSH key from the Github repository that contains your chat application. This will connect your javascript server to the DO server. The SSH key can be found on the right hand side of the repo page underneath settings.
 3. Finalize your files before pushing to the Github repository. Put all of your files in a single folder, and make sure that folder includes the JSON and WS packages. If it does not, "cd" into that folder on your terminal screen and run the commands "npm init" and "npm install ws --save." Make sure your client.js file is requesting to connect to your digital ocean url, and not to a local host. Now push to the Github repo.
 
-    var ws = new WebSocket('ws://jason.princesspeach.nyc:3000');
+`    var ws = new WebSocket('ws://jason.princesspeach.nyc:3000');`
 
-            NOT
+NOT
 
-    var ws = new WebSocket('ws://localhost:3000');
+`    var ws = new WebSocket('ws://localhost:3000');`
                 
 ### Hosting Steps
 
 1. In your terminal SSH to your DO box by running, "ssh root@yourDOurlname". You should now be inside the DO box on this terminal window
-2. From here run the following command to link to the chat app repo on your Github. `git clone yourrepohttpslink`. By doing this, you will be able to use the `git pull origin master` command any time you make a change to the original Github repo.
-3. `cd` into the repo folder and run "npm install"
-4. Run your chat app's server code by using the "node serverfilename" command. This will turn your DO box into a websocket.
+2. From here run the following command to link to the chat app repo on your Github. `git clone your_repo_https_link`. By doing this, you will be able to use the `git pull origin master` command any time you make a change to the original Github repo.
+3. `cd` into the repo folder and run `npm install`
+4. Run your chat app's server code by using the `node server_filename` command. This will turn your DO box into a websocket.
 5. Open another terminal window without closing your current one.
-6. In the new terminal window SSH to DO and "cd" into the app folder.
-7. Run "http-server". This will turn your DO box into a server running the html and css files that are in the folder.
-8. By only running "http-server" any connecting users will have to add the port number to the end of the url. For example: "http://yourDOname:8080
-9. If you run "http-server -p80" users will be able to connect by using the url without typing in "8080"
+6. In the new terminal window SSH to DO and `cd` into the app folder.
+7. Run `http-server`. This will turn your DO box into a server running the html and css files that are in the folder.
+8. By only running `http-server` any connecting users will have to add the port number to the end of the url. For example: `http://yourDOname:8080`.
+9. If you run `http-server -p80` users will be able to connect by using the url without typing in `8080`.
 
 #Additional Features
 ###History

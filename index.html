@@ -8,10 +8,9 @@
 <body>
 	<div id='entirePage'>
 		<div id='menu'>
-			<li class='listNav' id='installMove'><a href='#installPage' class='navItem'>Installation</a></li>
+			<li class='listNav' id='installMove'><a href='#installPage' class='navItem'>Setup/Installation</a></li>
 			<li class='listNav' id='clientMove'><a href='#clientPage' class='navItem'>Client</a></li>
 			<li class='listNav' id='serverMove'><a href='#serverPage' class='navItem'>Server</a></li>
-			<li class='listNav' id='styleMove'><a href='#stylePage' class='navItem'>Style</a></li>
 			<li class='listNav' id='gitMove'><a href='#gitPage' class='navItem'>Git/Github</a></li>
 			<li class='listNav' id='hostMove'><a href='#hostPage' class='navItem'>Hosting</a></li>
 		</div>
@@ -22,38 +21,46 @@
 
 		<div id='homePage' class='page'>
 			<h1>Introduction Headline</h1>
+			<p>This tutorial has been put together by four great minds to share to the public the various ways to build a chat application using Node.js, JSON, web sockets, and the like. Please feel free to look through our webpage, and if you like what you see then feel free to e-mail us happy thoughts and pictures of cats. If you don't like what you see then feel free to e-mail us happy thoughts and pictures of cats. Thanks and enjoy!</p>
 		</div>
 
 		<div id='installPage' class='page'>
-			<h1>Installing the shitz</h1>
-			<p>NPM is a package manager for open source coding. What this means is that programmers can share their projects and code with the public via installable packages. For example. WebSockets, which we will be using to build our chat app.</p>
+			<h1>Setup and Installation</h1>
 			
-			<h5>Using NPM and Node in the terminal, install WebSockets (ws):</h5>
+				<p>For this project you will need NPM, a package manager for Node based off of open source coding. This means that programmers can share their projects and code with the public via installable packages. For example: WebSockets, which we will be using to build our chat app.</p>
+      			
+      			<h5>Using NPM and Node in the terminal to install WebSockets (ws):</h5>
+			      <ol>
+			        <li>run "npm init" in order to connect to NPM</li>
+			        <li>Type "node npm install ws --save" and it should install.
+			          <ul>
+			            <li>depending on system preferences, you may need to use the "sudo" command in the terminal.</li>
+			            <li>"ws" is the NPM WebSocket package name. Visit the NPM WebSockets page <a href="https://www.npmjs.com/package/ws" id="wsref" target="_blank">here.</a></li>
+			            <li>"-- save" is used to permanently save the package to your computer. Therefore, you will not need to run "npm install" again.</li>
+			          </ul>
+			        </li>
+			      </ol>
 
-				<ol>
-					<li>run "npm init" in order to connect to NPM</li>
-					<li>Type "node npm install ws --save" and it should install.
-						<ul>
-							<li>depending on system preferences, may need to use sudo command into terminal.</li>
-							<li>"ws" is the NPM WebSocket package name. Visit https://www.npmjs.com/package/ws for more information</li>
-							<li>"-- save" is used to permanently save the package to your computer. Therefore, you will not need to run "npm install" again.</li>
-						</ul>
-					</li>
-				</ol>
+		      <h5>What are WebSockets?</h5>
 
-			<h5>What are WebSockets?</h5>
-				<ol>
-					<li>A WebSocket is an open interactive communication between a user's browser and a server.</li>
-					<li>They allow for a client to send information to a server, that information gets processed by that server then sent out to a new client. Starting to sounds familiar? Maybe like a way to communicate or chat?</li>
-					<li>This is the package that we will be using in order to create our chat app. Think of this as the foundation. </li>
-				</ol>
+			      <ol>
+			        <li>A WebSocket is an open interactive communication between a user's browser and a server.</li>
+			        <li>They allow for a client to send information to a server, that information gets processed by that server then sent out to a new client. Starting to sound familiar? Maybe like a way to communicate or chat?</li>
+			        <li>This is the package that we will be using in order to create our chat app. Think of this as the foundation. </li>
+			      </ol>
+			      
+		      <h5>Setting up HTML/CSS</h5>
 
+			      <ul>
+			        <li>Before we get knee deep in code we have to set up a bare bones HTML file. The client side will depend on selecting parts of our HTML. If that doesn't make sense, no worries, we will explain more below.</li>
+			        <li>Within the body of your HTML file create three separate DIV elements, you'll want to give them ID's. DIVs should be for a send button, placeholder which will show the client's input, and an area for displaying the text of the conversation.</li>
+			      </ul>
 
-			<p>Let's think about this project before we fully delve in. What is a chat app? On the simplest level it is exactly what we explained above with WebSockets. A means for more than one client to connect to each other through a server. We are going to use the "ws" package we installed to build a program that can contain unlimited clients that connect to a server. We will walk you through step by step on how to write both sides. We will even give you some challenges for how to create special functions within your app. Ready to go?</p>
+		      <p>Let's think about this project before we fully delve in. What is a chat app? On the simplest level it is exactly what we explained above with WebSockets. A means for more than one client to connect to each other via a server. We are going to use the "ws" package we installed to build a program that can contain unlimited clients that can connect to a server. We will walk you through, step by step, on how to write both sides. We will even give you some challenges for how to create special functions within your app. Ready to go?</p>
 		</div>
 
 		<div id='clientPage' class='page'>
-			<h1>This is how to build the client</h1>
+			<h1>Building Your Client.js File</h1>
 
 			<p>Double check to make sure all the right packages are installed before you start any actual coding. Revisit the "Installation" section for more information.</p>
 
@@ -159,7 +166,7 @@ ws.addEventListener('message', function(x){
 		</div>
 
 		<div id='serverPage' class='page'>
-			<h1>This is how to build the server</h1>
+			<h1>Building Your Server.js File</h1>
 
 			<p>Now that we have a super fancy functional client, we need a server so we can actually run our app. Remember all messages need to be sent through a server. Without this we have nothing. Let's begin by creating and opening a server.js file. We need to first declare a WebSocket server object using the same ws package. We are declaring the variable for the actual server: </p>
 
@@ -213,19 +220,14 @@ server.on("connection", function(ws) {
 
 		</div>
 
-		<div id='stylePage' class='page'>
-			<h1>Style your shit</h1>
-		</div>
-
 		<div id='gitPage' class='page'>
-			<h1>Putting your shit online</h1>
-			<p>What is Git and GitHub? 
-			Git is a VCS (Version Control System). Simply put, it’s a timeline for your project but a better way to understand it is like a tree. Your tree works like any other - with a base (master) and branches. With each project you will create a new repository (a project folder) and will be adding, committing, and pushing to that repo. Adding and committing are actions that happen locally (on your computer) but in order to fully save them you need to push everything to GitHub. GitHub is a website where you are saving all these different stages of your code. You can head over and view your code and so can others. Being able to save in stages is important because we all mess up sometimes. You’ll want to be able to go back in time to before the mess up occurred. When this happens - you’ll be using “clone” and “pull”. Branches are cool because they allow you to keep working on your project but in a separate place. Let’s say you want to add some features but aren’t completely confident in the process. Branch off of master (the base)and work away. If the code is a success, you can always “merge” that branch to master later. </p>
+			<h1>What is Git and Github?</h1>
+			<p>Git is a VCS (Version Control System). Simply put, it’s a timeline for your project but a better way to understand it is like a tree. Your tree works like any other - with a base (master) and branches. With each project you will create a new repository (a project folder) and will be adding, committing, and pushing to that repo. Adding and committing are actions that happen locally (on your computer) but in order to fully save them you need to push everything to GitHub. GitHub is a website where you are saving all these different stages of your code. You can head over and view your code and so can others. Being able to save in stages is important because we all mess up sometimes. You’ll want to be able to go back in time to before the mess up occurred. When this happens - you’ll be using “clone” and “pull”. Branches are cool because they allow you to keep working on your project but in a separate place. Let’s say you want to add some features but aren’t completely confident in the process. Branch off of master (the base)and work away. If the code is a success, you can always “merge” that branch to master later. </p>
 
 			<h5>Lets break the process down:</h5>
 
 				<ol>
-					<li>Head over to <a href='www.github.com'>www.github.com</a> and sign up or log in</li>
+					<li>Head over to <a href='http://www.github.com' target="_blank">www.github.com</a> and sign up or log in</li>
 					<li>Once you all logged in head over to the top right corner, hit the "+" icon, and select "Create New Repository"</li>
 					<li>You have a choice to make this file private or public. You should be making it public.
                 Why make a public repo? This way anyone can access your code! Employers often want to check out good code in GitHub so you’ll want to be able to share this. There’s a lot about cool projects that “made it big”. Who knows? Maybe your chat app will get noticed. </li>
@@ -250,7 +252,39 @@ server.on("connection", function(ws) {
 		</div>
 
 		<div id='hostPage' class='page'>
-			<h1>Host your shit so people you don't like can see it</h1>
+			<h1>Hosting Your Awesome Project on Digital Ocean</h1>
+			<p>Digital Ocean(DO) is a server service where you will be able to host your project. The following three items are necessary before starting the hosting steps:</p>
+
+			<ol>
+				<li>Create a <a href="http://www.digitalocean.com" target="_blank">Digital Ocean Account</a></li>	
+				<li>Grab the SSH key from the Github repository that contains your chat application. This will connect your javascript server to the DO server. The SSH key can be found on the right hand side of the repo page underneath settings.</li> 
+				<li>Finalize your files before pushing to the Github repository. Put all of your files in a single folder, and make sure that folder includes the JSON and WS packages. If it does not, "cd" into that folder on your terminal screen and run the commands "npm init" and "npm install ws --save." Make sure your client.js file is requesting to connect to your digital ocean url, and not to a local host. Now push to the Github repo.</li>
+			</ol>
+
+				<pre><code>
+var ws = new WebSocket('ws://jason.princesspeach.nyc:3000');
+
+			NOT
+
+var ws = new WebSocket('ws://localhost:3000');
+				</pre></code>
+
+			<h5>Hosting Steps</h5>
+
+			<ol>
+				<li>In your terminal SSH to your DO box by running, "ssh root@yourDOurlname". You should now be inside the DO box on this terminal window</li>
+				<li>from here run the following command to link to the chat app repo on your Github. "git clone yourrepohttpslink". By doing this, you will be able to use the "git pull origin master" command any time you make a change to the original Github repo. </li>
+				<li>"cd" into the repo folder and run "npm install"</li>
+				<li>Run your chat app's server code by using the "node serverfilename" command. This will turn your DO box into a websocket.</li>
+				<li>Open another terminal window without closing your current one.</li>
+				<li>In the new terminal window SSH to DO and "cd" into the app folder.</li>
+				<li>run "http-server". This will turn your DO box into a server running the html and css files that are in the folder.</li>	
+					<ul>
+						<li>By only running "http-server" any connecting users will have to add the port number to the end of the url. For example: "http://yourDOname:8080</li>
+						<li>If you run "http-server -p80" users will be able to connect by using the url without typing in "8080"</li>
+					</ul>
+			</ol>
+
 		</div>
 
 		<div id='notePage' class='page'>

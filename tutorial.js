@@ -34,12 +34,6 @@
     	}, 800);
     });
 
-    $('#styleMove').click(function(){
-    	$('html, body').animate({
-    		scrollTop: $('#stylePage').offset().top
-    	}, 800);
-    });
-
     $('#gitMove').click(function(){
     	$('html, body').animate({
     		scrollTop: $('#gitPage').offset().top

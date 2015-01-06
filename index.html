@@ -16,18 +16,19 @@
 		</div>
 
 		<div>
-			<h4><a href="#splashPage" id='backTop'> ^ </a></h4>
+			<h4 id='backTop'> ^ </h4>
 		</div>
 
 		<div id='homePage' class='page'>
-			<h1>Introduction Headline</h1>
-			<p>This tutorial has been put together by four great minds to share to the public the various ways to build a chat application using Node.js, JSON, web sockets, and the like. Please feel free to look through our webpage, and if you like what you see then feel free to e-mail us happy thoughts and pictures of cats. If you don't like what you see then feel free to e-mail us happy thoughts and pictures of cats. Thanks and enjoy!</p>
+		      <h1>TOTALLY AWESOME CHAT APPLICATION TUTORIAL</h1>
+		      <h2>One day, four great minds sat down and formulated this tutorial in order to teach the world how to build and awesome chat application using Node.js, JSON, WebSockets, and the like. Please feel free to look through our webpage, and if you like what you see, e-mail us happy thoughts and pictures of cats. If you don't like what you see, still e-mail us happy thoughts and pictures of cats. Thanks and enjoy.</h2>
 		</div>
+
 
 		<div id='installPage' class='page'>
 			<h1>Setup and Installation</h1>
-			
-				<p>For this project you will need NPM, a package manager for Node based off of open source coding. This means that programmers can share their projects and code with the public via installable packages. For example: WebSockets, which we will be using to build our chat app.</p>
+
+				<p>For this project you will need NPM, a package manager that runs in the command line and is default for Node.js. Node.js is a server-side platform that is written in Javascript. We will also be utilizing websockets, which allows the client side to communicate with the server side.</p>
       			
       			<h5>Using NPM and Node in the terminal to install WebSockets (ws):</h5>
 			      <ol>
@@ -59,56 +60,70 @@
 		      <p>Let's think about this project before we fully delve in. What is a chat app? On the simplest level it is exactly what we explained above with WebSockets. A means for more than one client to connect to each other via a server. We are going to use the "ws" package we installed to build a program that can contain unlimited clients that can connect to a server. We will walk you through, step by step, on how to write both sides. We will even give you some challenges for how to create special functions within your app. Ready to go?</p>
 		</div>
 
+
+
+
 		<div id='clientPage' class='page'>
 			<h1>Building Your Client.js File</h1>
+			
+				<p>Double check to make sure all the right packages are installed before you start any actual coding. Revisit the "Setup/Installation" section for more information.</p>
+			    
+			    <h5>Declare a host</h5>
 
-			<p>Double check to make sure all the right packages are installed before you start any actual coding. Revisit the "Installation" section for more information.</p>
-
-			<h5>Declare a host</h5>
-				<p>We have to write a line of code that will find and connect to a specific server. To host your chat app live, we must declare a variable calling that specific url.</p>
+					<p>First, create a file in your favorite text editor, we recommend naming the file, "client.js". Let's start by declaring a host which will connect us to the server.</p>
 
 					<pre><code>
 var ws = new WebSocket(server url);
-					</code></pre> 
-
-				<p>When you first begin you may want to host your chat app locally. This will allow you to test your code without having to push updated versions to your server or github. That line of code should look a little like this.</p>
-
+					</code></pre>
+					
+					<p>When you first begin you may want to host your chat app locally. This will allow you to test your code without having to push updated versions to your server or github. That line of code should look a little like this.</p>
+					
 					<pre><code>
 var ws = new WebSocket('ws://localhost:3000');
 					</code></pre>
-
-				<p>Create an event listener which will listen for when the client connects with the server.</p>
-
+					
+					<ul>
+						<li>This will allow you to locally host the chat app.</li>
+						<li>Being able to host locally is important in order to test out our app.</li>
+					</ul>
+					
+					<p>Create an event listener method which will listen for when the page is open or connected to a server.</p>
+					
 					<pre><code>
 ws.addEventListener('open', function(evt){
-	Almost all of your client code will go inside of here.
+Almost all of your client code will go inside of here.
 });
 					</code></pre>
-
-				<p>In order to set up the basics for your chat app you will need to use DOM manipulation. We already set up a bare bones HTML file. So you will either need to be creating new elements through DOM manipulation or selecting them. For example to target the submit button in your html you may write something similar to the following:</p>
-
+					
+					<p>In order to set up the basics for your chat app you will need to use DOM manipulation. We already set up a bare bones HTML file. So you will either need to be creating new elements through DOM manipulation or selecting them. For example to target the submit button in your html you may write something similar to the following:</p>
+					
 					<pre><code>
 var submitButton = document.querySelector('button');
 					</pre></code>
-
-				<p>What information are you storing about your client? We will be using OBJECTS to store multiple key/value pairs (hashes). Lets keep it simple and just transfer a name and text between users.</p>
-
+					<p>What information are you storing about your client? We will be using OBJECTS to store multiple key/value pairs (hashes). Lets keep it simple and just transfer a name and text between users.</p>
 					<pre><code>
 var object = {
-	name : name,
-	text : YourInputBox.value,
+name : name,
+text : YourInputBox.value,
 }
 					</pre></code>
-
-				<p>Wait, we can't send Objects the way they are formatted. So how do we send information? JSON. JSON (JavaScript Object Notation) is just a simple way to interchange data. Clients can only send data in the form of strings, JSON is able to break code down and represent it in the form of objects with key/value pairs, hashes or arrays. There are two main commands for the sending and receiving data through JSON:</p>
-
+					
 					<ul>
-						<li>Stringify</li>
+						<li>".value" is a property used when sending data to the server, it returns the value of the data in the form of a string.</li>
+					</ul>
+					
+					<p>Wait, we can't send Objects the way they are formatted. So how do we send information? JSON. JSON (JavaScript Object Notation) is just a simple way to interchange data. Since clients can only send data in the form of strings, JSON is able to break code down and represent it in the form of objects with key/value pairs, hashes or arrays. There are two main commands for the sending and receiving data through JSON:</p>
+					
+					<ul>
+						<li>Stringify - sending data</li>
+						
 							<ul>
 								<li>The stringify method alters objects into strings so that data can be transmitted and received. Again, clients can only send data in the form of strings that can be read by the server. </li>
 								<li>Once an object has been stringified it can be sent by the client to the server using ws.send (more on that later).</li>
 							</ul>
-						<li>Parse</li>
+
+						<li>Parse - receiving data</li>
+						
 							<ul>
 								<li>The server has not received stringified data from the client, but now we need to send that data out to the next client as an object.</li>
 								<li>We use the parse method to turn our string back into an object and send it out.</li>
@@ -120,136 +135,200 @@ var object = {
 var stringified = JSON.stringify(object);
 var parsed = JSON.parse(object);
 					</pre></code>
-			
-			<h5>Sending Information</h5>
 
-				<ol>
-					<li>Create an event listener which will listen for an action. For example, you may use a query selector and target the button you created for the user to click when submitting their text</li>
-					<li>When this event is triggered it will run a function which should include a “send” method.</li>
-					<li>In this case, userMessage, will be a stringified object.</li>
-					<li>The values within the object are text which was grabbed from an input box (which we created in our HTML) the moment the submit button was clicked.</li>
-					<li>What does this mean? This about the first step of writing in a chat app. We open our app, type into and input box, and click send. </li>		
-				</ol>
-
-				<pre><code>
+					<h5>Sending Information</h5>
+					
+					<ol>
+						<li>Create an event listener which will listen for an action. For example, !!!** clicking the submit button. //OR you may use a query selector and target the button you created for the user to click when submitting their text????**</li>
+						<li>When this event is triggered it will run a function which should include a "send" method.</li>
+						<li>In this case, userMessage, will be a stringified object.</li>
+						<li>The values within the object are text which was grabbed from an input box (which we created in our HTML) the moment the submit button was clicked.</li>
+						<li>What does this mean? This about the first step of writing in a chat app. We open our app, type into and input box, and click send. </li>
+					</ol>
+					
+					<pre><code>
 button.addEventListener('click', function(){
-	var object = {
-		name : name,
-		text : YourInputBox.value,
-	}
-
-	var userMessage = JSON.stringify(object);
-	ws.send(userMessage);
+var object = {
+name : name,
+text : YourInputBox.value,
+}
+var userMessage = JSON.stringify(object);
+ws.send(userMessage);
 });
-				</pre></code>
+					</pre></code>
 
-			<h5>Receiving Information</h5>
-				<ol>
-					<li>The event listener in this scenario will be "message."" Whenever a message is received by the client, the file will run a function.</li>
-					<li>The goal is to use stringify and parse in both the client and server JS files. For example, the server should be parsing and storing some of the information which has been sent, such as keeping a history of the chat, to share with new users. The server would then stringify and send the information back out to the new clients. </li>
-					<li>Receiving messages will always need to be parsed for the server to be able to read them. Once parsed you can determine what to do with the values in the object:</li>		
-				</ol>
-
-				<pre><code>
+					<h5>Receiving Information</h5>
+					
+					<ol>
+						<li>The event listener in this scenario will be "message."" Whenever a message is received by the client, the file will run a function.</li>
+						<li>The goal is to use stringify and parse in both the client and server JS files. For example, the server should be parsing and storing some of the information which has been sent, such as keeping a history of the chat, to share with new users. The server would then stringify and send the information back out to the new clients. </li>
+						<li>Receiving messages will always need to be parsed for the server to be able to read them. Once parsed you can determine what to do with the values in the object:</li>
+					</ol>
+					
+					<pre><code>
 ws.addEventListener('message', function(x){
-	var parsed = JSON.parse(x.data);
-	var paragraph = document.createElement('span');
-	var userbubble = document.createElement('div');
-	var lineBreak = document.createElement('br');
-	paragraph.innerText = parsed.name + ": " + parsed.text;
-	paragraph.appendChild(lineBreak);
-	userbubble.appendChild(paragraph);
-	ChatBoxDiv.appendChild(bubble);
+var parsed = JSON.parse(x.data);
+var paragraph = document.createElement('span');
+var userbubble = document.createElement('div');
+var lineBreak = document.createElement('br');
+paragraph.innerText = parsed.name + ": " + parsed.text;
+paragraph.appendChild(lineBreak);
+userbubble.appendChild(paragraph);
+ChatBoxDiv.appendChild(bubble);
 });
-				</pre></code>
-		
+					</pre></code>
 		</div>
+
+
+
+
 
 		<div id='serverPage' class='page'>
 			<h1>Building Your Server.js File</h1>
 
-			<p>Now that we have a super fancy functional client, we need a server so we can actually run our app. Remember all messages need to be sent through a server. Without this we have nothing. Let's begin by creating and opening a server.js file. We need to first declare a WebSocket server object using the same ws package. We are declaring the variable for the actual server: </p>
+				<p>Now that we have a super fancy functional client, we need a server so we can actually run our app. Remember all messages need to be sent through a server. Without this we have nothing. Let's begin by creating and opening a server.js file. We need to first declare a WebSocket server object using the same ws package. We are declaring the variable for the actual server: </p>
 
-			<pre><code>
+				<pre><code>
 var WebSocketServer = require("ws").Server;
 var server = new WebSocketServer({port : 3000});
-			</pre></code>
+				</pre></code>
 
-			<p>Port:3000 is simply telling the server which port to listen on. This is important for when we get to the hosting stage.</p>
+				<p>Port:3000 is simply telling the server which port to listen on. This is important for when we get to the hosting stage.</p>
+				<p>The server will need to maintain a list of all connected clients. Let's go ahead and create a new variable called clients. This will be an empty array. </p>
+				
+				<pre><code>
+var clients = [];
+				</pre></code>
 
-			<p>The server will need to maintain a list of all connected clients. Let's go ahead and create a new variable called clients. This will be an empty array. </p>
-
-			<p>We need an event listener for the event of each client connecting to the server. This is what it’s all about; it’s basically what the server is for. All the other code will go inside this event listener.</p>
-
-			<pre><code>
+				<p>We need an event listener for the event of each client connecting to the server. This is what it's all about; it's basically what the server is for. All the other code will go inside this event listener.</p>
+				
+				<pre><code>
 server.on('connection', function(ws){
-	
 })
-			</pre></code>
-			
-			<p>While the WebSocket connection is running, we want to perform three tasks: (1) add the new client to the server-maintained clients array, (2) listen for a WebSocket connection closing, and (3) listen for a message from a WebSocket client and broadcast it.</p>
+				</pre></code>
 
-			<ol>
+				<p>While the WebSocket connection is running, we want to perform three tasks: (1) add the new client to the server-maintained clients array, (2) listen for a WebSocket connection closing, and (3) listen for a message from a WebSocket client and broadcast it.</p>
+<!-- <ol>
+<li>Add the new client to the server-maintained clients array.</li>
+<li>Listen for a WebSocket connection closing. Close it and remove it from the array. This is important. Without this step, every time a client leaves, our app will crash.</li>
+<li>Listen for a message from a WebSocket client and broadcast it.</li>
+</ol>
+<pre><code>
+server.on("connection", function(ws) {
+clients.push(ws);
+ws.on("close", function() {
+var x = clients.indexOf(ws);
+clients.splice(x,1);
+console.log("Clients connected: " + clients.length);
+});
+ws.on("message", function(input) {
+processedInput = JSON.parse(input);
+console.log(processedInput.name + " : " + processedInput.text);
+for (i = 0; i < clients.length; i++) {
+clients[i].send(input);
+};
+});
+});
+</pre></code> -->
+
+				<ol>
 				<li>Add the new client to the server-maintained clients array.</li>
+				<pre><code>
+server.on("connection", function(ws) {
+clients.push(ws);
+				</code></pre>
 
 				<li>Listen for a WebSocket connection closing. Close it and remove it from the array. This is important. Without this step, every time a client leaves, our app will crash.</li>
+				
+				<pre><code>
+server.on("connection", function(ws) {
+clients.push(ws);
+ws.on("close", function() {
+var x = clients.indexOf(ws);
+clients.splice(x,1);
+console.log("Clients connected: " + clients.length);
+})
+});
+				</code></pre>
 
 				<li>Listen for a message from a WebSocket client and broadcast it.</li>
+				
+				<pre><code>
+ws.on("message", function(input) {
+				</code></pre>
+				
 			</ol>
 
-							<pre><code>
+				<ul>
+				<li>As mentioned above, we need to use JSON to parse the input, translating it from a string to an object.</li>
+				
+				<pre><code>
+processedInput = JSON.parse(input);
+console.log(processedInput.name + " : " + processedInput.text);
+				</code></pre>
+
+				<li>Finally, we loop through each client in the array and send out the message to each of them.</li>
+				
+				<pre><code>
+for (i = 0; i < clients.length; i++) {
+clients[i].send(input);
+				</code></pre>
+
+				<li>Eveything together looks like this:</li>
+				
+				<pre><code>
 server.on("connection", function(ws) {
-    clients.push(ws);
-    ws.on("close", function() {
-        var x = clients.indexOf(ws);
-        clients.splice(x,1);
-        console.log("Clients connected: " + clients.length);
-    });
-
-    ws.on("message", function(input) {
-
-		processedInput = JSON.parse(input);
-		console.log(processedInput.name + " : " + processedInput.text);
-
-		for (i = 0; i < clients.length; i++) { 
-			clients[i].send(input);  
-		};
-	});
+clients.push(ws);
+ws.on("close", function() {
+var x = clients.indexOf(ws);
+clients.splice(x,1);
+console.log("Clients connected: " + clients.length);
 });
-				</pre></code>
+
+ws.on("message", function(input) {
+processedInput = JSON.parse(input);
+console.log(processedInput.name + " : " + processedInput.text);
+
+for (i = 0; i < clients.length; i++) {
+clients[i].send(input);
+}
+});
+				</code></pre>
+			</ul>
 
 		</div>
 
 		<div id='gitPage' class='page'>
 			<h1>What is Git and Github?</h1>
-			<p>Git is a VCS (Version Control System). Simply put, it’s a timeline for your project but a better way to understand it is like a tree. Your tree works like any other - with a base (master) and branches. With each project you will create a new repository (a project folder) and will be adding, committing, and pushing to that repo. Adding and committing are actions that happen locally (on your computer) but in order to fully save them you need to push everything to GitHub. GitHub is a website where you are saving all these different stages of your code. You can head over and view your code and so can others. Being able to save in stages is important because we all mess up sometimes. You’ll want to be able to go back in time to before the mess up occurred. When this happens - you’ll be using “clone” and “pull”. Branches are cool because they allow you to keep working on your project but in a separate place. Let’s say you want to add some features but aren’t completely confident in the process. Branch off of master (the base)and work away. If the code is a success, you can always “merge” that branch to master later. </p>
 
-			<h5>Lets break the process down:</h5>
+			<p>Git is a VCS (Version Control System). Simply put, it's a timeline for your project but a better way to understand it is like a tree. Your tree works like any other - with a base (master) and branches. With each project you will create a new repository (a project folder) and will be adding, committing, and pushing to that repo. Adding and committing are actions that happen locally (on your computer) but in order to fully save them you need to push everything to GitHub. <a href="https://github.com" target="_blank">GitHub</a> is a website where you are saving all these different stages of your code. You can head over and view your code and so can others. Being able to save in stages is important because we all mess up sometimes. You'll want to be able to go back in time to before the mess up occurred. When this happens - you'll be using <code>clone</code> and <code>pull</code>. Branches are cool because they allow you to keep working on your project but in a separate place. Let's say you want to add some features but aren't completely confident in the process. Branch off of master (the base) and work away. If the code is a success, you can always <code>merge</code> that branch to master later.</p>
+
+			<h5>Let's break the process down:</h5>
 
 				<ol>
-					<li>Head over to <a href='http://www.github.com' target="_blank">www.github.com</a> and sign up or log in</li>
-					<li>Once you all logged in head over to the top right corner, hit the "+" icon, and select "Create New Repository"</li>
+					<li>Head over to <a href='www.github.com'>www.github.com</a> and sign up or log in.</li>
+					<li>Once you're all logged in, head over to the top right corner, hit the "+" icon, and select "Create New Repository".</li>
 					<li>You have a choice to make this file private or public. You should be making it public.
-                Why make a public repo? This way anyone can access your code! Employers often want to check out good code in GitHub so you’ll want to be able to share this. There’s a lot about cool projects that “made it big”. Who knows? Maybe your chat app will get noticed. </li>
-                	<li>Once you’ve created your new repo you will be taken to an empty project page. Once you have pushed to GitHub, all your files can be accessed here.</li>
+                Why make a public repo? This way anyone can access your code! Employers often want to check out good code in GitHub so you'll want to be able to share this. There's a lot of cool projects that made it big. Who knows? Maybe your chat app will get noticed. </li>
+                	<li>Once you've created your new repo you will be taken to an empty project page. Once you have pushed to GitHub, all your files can be accessed here.</li>
 				</ol>
 
 			<h5>Committing to Github</h5>
 
 				<ol>
 					<li>Open terminal and make sure you are in your projects folder (directory).</li>
-					<li>Type "git init" - this will get GIT running. </li>
-					<li>Type "git add ." in order to add all the files in the directory. You don’t have to add everything at once, but this is a great shortcut. </li>
-					<li>To make the actual commit you will need to type "git commit -m 'some sort of message'."What is committing and how is it different then adding? When you added your files all you did was add them, nothing was really saved. Committing is going to actually save all those files to be accessed later. Remember, nothing is on GitHub yet - this is still only local. Messages are important so that you remember exactly what occurred. Be careful with what words are used in messages, sometimes employers like to check them out. </li>
-					<li>We need to give our saved files a place to go. Head back to GitHub and copy the SSH link. It will look something like this - git@github.com:JohnSmith/chatapp.git</li>
-					<li>In terminal type out "git remote add origin git@github.com:JohnSmith/chatapp.git"</li>
-					<li>Last step - “git push origin master” and you should get some sort of message when this process is completed. </li>
+					<li>Type <code>git init</code>. This will get GIT running. </li>
+					<li>Type <code>git add .</code> in order to add all the files in the directory. You don't have to add everything at once, but this is a great shortcut. </li>
+					<li>To make the actual commit you will need to type <code>git commit -m </code><i>[some sort of message]</i>. What is committing and how is it different then adding? When you added your files all you did was add them, nothing was really saved. Committing is going to actually save all those files to be accessed later. Remember, nothing is on GitHub yet - this is still only local. Messages are important so that you remember exactly what occurred. Be careful with what words are used in messages, sometimes employers like to check them out. </li>
+					<li>We need to give our saved files a place to go. Head back to GitHub and copy the SSH link. It will look something like this: <code>git@github.com:JohnSmith/chatapp.git</code>.</li>
+					<li>In terminal type out <code>git remote add origin git@github.com:JohnSmith/chatapp.git</code>.</li>
+					<li>Last step&mdash;<code>git push origin master</code> and you should get some sort of message when this process is completed.</li>
 					<li>Refresh the project page and all your files, folders, and code should be there.
-               What exactly is happening here? We are saving our commit to GitHub and telling it that our origin is our base (master). If you were working of branch you would type that branch name instead of master.</li>
-
+               What exactly is happening here? We are saving our commit to GitHub and telling it that our origin is our base (master). If you were working off a branch you would type that branch name instead of master.</li>
 				</ol>
-
 		</div>
+
+
 
 		<div id='hostPage' class='page'>
 			<h1>Hosting Your Awesome Project on Digital Ocean</h1>
@@ -287,19 +366,8 @@ var ws = new WebSocket('ws://localhost:3000');
 
 		</div>
 
-		<div id='notePage' class='page'>
-			<h1>Notes, delete this page when done</h1>
-			<ul>
-				<li>In Page Links</li>
-				<li>Back To Top Button</li>
-				<li>menu or nav bar</li>
-				<li>give the text center and padding</li>
-				<li>incorporate javascript scrolling abilities</li>
-				<li>put in images or gifs?</li>
-				<li>assume they have node and git installed and assume they know JS</li>
-				<li>you could also create a markdown?</li>
-				<li>Maybe replace the spaces in the front of the pre tags using JS?</li>
-			</ul>
+		<div id='lastPage' class='page'>
+			<h1 id='congrats'>Congratulations On Your Victory!</h1>
 		</div>
 	</div>
 
